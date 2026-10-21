@@ -8,4 +8,12 @@ public class Camera {
         this.y = y;
         this.zoom = zoom;
     }
+
+    public void move_vertical(double units) {
+        this.y += units;
+    }
+
+    public void move_horizontal(double units) {
+        this.x += units;
+    }
 }

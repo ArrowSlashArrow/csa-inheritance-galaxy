@@ -5,7 +5,7 @@ import javax.swing.*;
 public class Runner extends JPanel {
     private Debug perf = new Debug();
     private World world;
-    private Camera camera = new Camera(0, 0, 1.0);
+    private Camera camera = new Camera(Consts.WINDOW_WIDTH / 2, Consts.WINDOW_HEIGHT / 2, 1.0);
     private static Keybinds kb = new Keybinds();
     private static ScrollHandler sc = new ScrollHandler();
 
@@ -36,6 +36,8 @@ public class Runner extends JPanel {
             perf.start_physics_time = System.nanoTime();
             this.world.updatePhysics();
             perf.compute_physics_delta();
+
+            this.handle_events();
         });
         tung.start();
     }
@@ -49,10 +51,42 @@ public class Runner extends JPanel {
         this.world.render(g2, this.camera);
 
         // debug texts
-        g2.drawString(String.format("Physics: %.3fms", (double) (this.perf.physics_delta) / 1000000.0), 10, 10);
-        g2.drawString(String.format("Balls: %d", this.world.get_particle_count()), 10, 20);
+        g2.drawString(String.format("Physics: %.3fms", (double) (this.perf.physics_delta) / 1000000.0), 1, 11);
+        g2.drawString(String.format("Balls: %d", this.world.get_particle_count()), 1, 21);
+        g2.drawString(String.format("Camera: (%.2f, %.2f) %.2fx", this.camera.x, this.camera.y, this.camera.zoom), 1,
+                31);
 
         // this.cam_zoom *= 1.02;
+    }
+
+    private void handle_events() {
+        double move_amount = 5.0 / this.camera.zoom;
+        if (this.kb.shift) {
+            move_amount *= 5.0;
+        }
+
+        if (this.kb.w_pressed) {
+            this.camera.move_vertical(-move_amount);
+        }
+        if (this.kb.s_pressed) {
+            this.camera.move_vertical(move_amount);
+        }
+        if (this.kb.a_pressed) {
+            this.camera.move_horizontal(-move_amount);
+        }
+        if (this.kb.d_pressed) {
+            this.camera.move_horizontal(move_amount);
+        }
+
+        if (this.sc.unhandled_events) {
+            if (this.sc.scrolled_down) {
+                this.camera.zoom *= 0.9;
+            }
+            if (this.sc.scrolled_up) {
+                this.camera.zoom /= 0.9;
+            }
+            this.sc.reset_state();
+        }
     }
 }
 

@@ -73,8 +73,13 @@ public class World {
     public void render(Graphics2D g2, Camera cam) {
         g2.setColor(Color.white);
         for (Ball b : this.balls) {
-            g2.fillOval((int) ((b.xpos - cam.x) / cam.zoom), (int) ((b.ypos - cam.y) / cam.zoom),
-                    b.radius, b.radius);
+            // this is supposed to be diameter, but I am rendering the particles smaller
+            int radius = Math.max(1, (int) ((double) b.radius * cam.zoom));
+
+            int screen_x = (int) ((b.xpos - cam.x) * cam.zoom + Consts.WINDOW_WIDTH / 2);
+            int screen_y = (int) ((b.ypos - cam.y) * cam.zoom + Consts.WINDOW_HEIGHT / 2);
+
+            g2.fillOval(screen_x, screen_y, radius, radius);
         }
     }
 

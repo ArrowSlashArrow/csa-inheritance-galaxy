@@ -18,4 +18,10 @@ public class ScrollHandler implements MouseWheelListener {
             this.scrolled_down = true;
         }
     }
+
+    public void reset_state() {
+        this.unhandled_events = false;
+        this.scrolled_down = false;
+        this.scrolled_up = false;
+    }
 }

@@ -6,6 +6,7 @@ public class Keybinds extends DefaultKeyboardFocusManager {
     public boolean a_pressed = false;
     public boolean s_pressed = false;
     public boolean d_pressed = false;
+    public boolean shift = false;
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent ke) {
@@ -16,6 +17,7 @@ public class Keybinds extends DefaultKeyboardFocusManager {
                     case KeyEvent.VK_A -> a_pressed = true;
                     case KeyEvent.VK_S -> s_pressed = true;
                     case KeyEvent.VK_D -> d_pressed = true;
+                    case KeyEvent.VK_SHIFT -> shift = true;
                 }
                 break;
             case KeyEvent.KEY_RELEASED:
@@ -24,6 +26,7 @@ public class Keybinds extends DefaultKeyboardFocusManager {
                     case KeyEvent.VK_A -> a_pressed = false;
                     case KeyEvent.VK_S -> s_pressed = false;
                     case KeyEvent.VK_D -> d_pressed = false;
+                    case KeyEvent.VK_SHIFT -> shift = false;
                 }
                 break;
         }
