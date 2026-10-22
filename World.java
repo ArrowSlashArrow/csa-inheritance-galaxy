@@ -39,7 +39,7 @@ public class World {
 
                 double fm = force_multiplier;
                 if (j instanceof Antiball)
-                    fm *= -1;
+                    fm = -10;
 
                 double dx = j.xpos - i.xpos;
                 double dy = j.ypos - i.ypos;

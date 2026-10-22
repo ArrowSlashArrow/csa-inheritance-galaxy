@@ -4,11 +4,11 @@ alternatively, use `run.ps1`
 
 
 # controls
-w/a/s/d - move camera
-shift - move camera in that direction faster
-space - pause sim (finnicky)
+w/a/s/d - move camera  
+shift - move camera in that direction faster  
+space - pause sim (finnicky)  
 
 # colours
-white - regular particle
-cyan - antiparticle (repels things and itself)
+white - regular particle  
+cyan - antiparticle (is supposed to repel things and itself)  
 gray - dense particle
